@@ -12,9 +12,6 @@ var todos = [
         description: " i will practice JS",
     }
 ]
-var todoTitleInput = document.getElementById("todo-title")
-var todoDescriptionTextBox = document.getElementById("todo-description")
-
 
 var todoList = document.getElementById("todo-list");
 
