@@ -32,10 +32,12 @@ function renderTodoList() {
 
 renderTodoList();
 
-function onTodoSubmit() {
+function onTodoSubmit(form) {
+    // good way of taking values from HtmlForm;
+    let formData = new FormData(form);
     todos.push({
-        title: todoTitleInput.value,
-        description:todoDescriptionTextBox.value,
+        title: formData.get('todo-title'),
+        description: formData.get('todo-description'),
     })
     renderTodoList();
 }

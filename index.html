@@ -7,9 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form onsubmit="onTodoSubmit()" action="javascript:void(0);">
-        <input type="text" id="todo-title">
-        <textarea id="todo-description"></textarea>
+    <form onsubmit="onTodoSubmit(this)" action="javascript:void(0);">
+        <input type="text" name="todo-title" id="todo-title">
+        <textarea id="todo-description" name="todo-description"></textarea>
         <button type="submit">submit</button>
     </form>
     <ul id="todo-list">
