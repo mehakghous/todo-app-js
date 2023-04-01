@@ -17,10 +17,10 @@ var todoList = document.getElementById("todo-list");
 
 function renderTodoList() {
     todoList.innerHTML = '';
-    for(var i = 0; i<todos.length; i++){
+    for (var i = 0; i < todos.length; i++) {
         todoList.innerHTML += `
         <li>
-            <h1>${todos[i].title}</h1>
+            <h1>${todos[i].title} <button onclick="deleteTodo(${i})">Delete</button></h1> 
             <p>${todos[i].description}</p>
         </li>`;
 
@@ -30,11 +30,19 @@ function renderTodoList() {
 renderTodoList();
 
 function onTodoSubmit(form) {
-    // good way of taking values from HtmlForm;
     let formData = new FormData(form);
-    todos.push({
-        title: formData.get('todo-title'),
-        description: formData.get('todo-description'),
-    })
+    if (!formData.get("todo-title") || !formData.get("todo-description")) {
+        alert("please fill input")
+    } else {
+        // good way of taking values from HtmlForm;
+        todos.push({
+            title: formData.get('todo-title'),
+            description: formData.get('todo-description'),
+        })
+    }
+    renderTodoList();
+}
+function deleteTodo(i) {
+    todos.splice(i, 1);
     renderTodoList();
 }
