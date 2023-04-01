@@ -12,10 +12,14 @@ var todos = [
         description: " i will practice JS",
     }
 ]
+var todoTitleInput = document.getElementById("todo-title")
+var todoDescriptionTextBox = document.getElementById("todo-description")
+
 
 var todoList = document.getElementById("todo-list");
-// var li = document.createElement("li")
+
 function renderTodoList() {
+    todoList.innerHTML = '';
     for(var i = 0; i<todos.length; i++){
         todoList.innerHTML += `
         <li>
@@ -25,4 +29,13 @@ function renderTodoList() {
 
     }
 }
+
 renderTodoList();
+
+function onTodoSubmit() {
+    todos.push({
+        title: todoTitleInput.value,
+        description:todoDescriptionTextBox.value,
+    })
+    renderTodoList();
+}
