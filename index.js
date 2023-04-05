@@ -63,7 +63,6 @@ function setTodos() {
 }
 
 function editTodo(i) {
-    console.log(i);
     const form = document.getElementById('todo-form');
     form['todo-title'].value = todos[i].title;
     form['todo-description'].value = todos[i].description;
