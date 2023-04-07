@@ -7,20 +7,29 @@ let editTodoIndex = -1;
 function renderTodoList() {
     todoList.innerHTML = '';
     for (var i = 0; i < todos.length; i++) {
+        const todo = todos[i];
+        const checkedClass = todo.completed ? 'class="done-todo"' : '';
         todoList.innerHTML += `
         <li>
             <h1>
-            ${todos[i].title} 
+            <input type='checkbox' onchange="toggleTodo(${i})" ${todo.completed && 'checked'} />
+            <span ${checkedClass}>${todo.title}</span> 
             <button onclick="editTodo(${i})">Edit</button>
             <button onclick="deleteTodo(${i})">Delete</button>
             </h1> 
-            <p>${todos[i].description}</p>
+            <p ${checkedClass}>${todo.description}</p>
         </li>`;
 
     }
 }
 
 renderTodoList();
+
+function toggleTodo(i) {
+    todos[i].completed = !todos[i].completed
+    setTodos()
+    renderTodoList();
+}
 
 function onTodoSubmit(form) {
     let formData = new FormData(form);
@@ -32,6 +41,7 @@ function onTodoSubmit(form) {
     const todo = {
         title: formData.get('todo-title'),
         description: formData.get('todo-description'),
+        completed: true
     }
 
     if (editTodoIndex !== -1) {
@@ -63,6 +73,10 @@ function setTodos() {
 }
 
 function editTodo(i) {
+    if(todos[i].completed){
+        alert('completed todo cannot be edited!')
+        return;
+    }
     const form = document.getElementById('todo-form');
     form['todo-title'].value = todos[i].title;
     form['todo-description'].value = todos[i].description;
